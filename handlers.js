@@ -8,10 +8,17 @@ const getResponseHeaders = () => {
   };
 };
 
-module.exports.beacon = async (event) => {
-  const parameters = Object.entries(event.queryStringParameters);
+const buildParameters = ({ queryStringParameters, body }) => [
+  ...queryStringParameters && queryStringParameters.length ? Object.entries(queryStringParameters) : [],
+  ...body ? Object.entries(JSON.parse(body)) : [],
+].reduce((all, [key, value]) => {
+  all[key] = value;
+  
+  return all;
+}, {});
 
-  console.log(parameters);
+module.exports.beacon = async (event) => {
+  console.log(buildParameters(event));
 
   return {
     statusCode: 204,
