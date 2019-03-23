@@ -13,12 +13,13 @@ const buildParameters = ({ queryStringParameters, body }) => [
   ...body ? Object.entries(JSON.parse(body)) : [],
 ].reduce((all, [key, value]) => {
   all[key] = value;
-  
+
   return all;
 }, {});
 
 module.exports.beacon = async (event) => {
-  console.log(buildParameters(event));
+  console.log(event.body)
+  // console.log(buildParameters(event));
 
   return {
     statusCode: 204,
