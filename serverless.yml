@@ -1,0 +1,13 @@
+service: boomerang-catcher
+provider:
+  name: aws
+  runtime: nodejs8.10
+  region: eu-west-2
+functions:
+  beacon:
+    handler: handlers.beacon
+    events:
+      - http:
+          method: get
+          path: beacon
+          cors: true
