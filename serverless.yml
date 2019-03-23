@@ -11,3 +11,7 @@ functions:
           method: get
           path: beacon
           cors: true
+      - http:
+          method: post
+          path: beacon
+          cors: true
