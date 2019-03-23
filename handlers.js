@@ -4,7 +4,7 @@ const getResponseHeaders = () => {
   }
 
   return {
-    'Access-Control-Allow-Origin': process.env.corsAllowOrigin;
+    'Access-Control-Allow-Origin': process.env.corsAllowOrigin,
   };
 };
 
