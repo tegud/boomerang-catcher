@@ -15,6 +15,6 @@ module.exports.beacon = async (event) => {
 
   return {
     statusCode: 200,
-    headers: getHeaders(),
+    headers: getResponseHeaders(),
   };
 };
