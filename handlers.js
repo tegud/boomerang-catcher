@@ -1,3 +1,5 @@
+const querystring = require('querystring');
+
 const getResponseHeaders = () => {
   if (!process.env.corsAllowOrigin) {
     return {};
@@ -8,9 +10,11 @@ const getResponseHeaders = () => {
   };
 };
 
+const parseBodyParameters = body => body ? Object.entries(querystring.parse(body)) : [];
+
 const buildParameters = ({ queryStringParameters, body }) => [
   ...queryStringParameters && queryStringParameters.length ? Object.entries(queryStringParameters) : [],
-  ...body ? Object.entries(JSON.parse(body)) : [],
+  ...parseBodyParameters(body),
 ].reduce((all, [key, value]) => {
   all[key] = value;
 
@@ -18,8 +22,7 @@ const buildParameters = ({ queryStringParameters, body }) => [
 }, {});
 
 module.exports.beacon = async (event) => {
-  console.log(event.body)
-  // console.log(buildParameters(event));
+  console.log(buildParameters(event));
 
   return {
     statusCode: 204,
