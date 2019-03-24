@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npm run lint && npm run jest",
+    "lint": "eslint handlers.js lib/**/*.js",
+    "jest": "jest"
   },
   "repository": {
     "type": "git",
@@ -16,5 +18,13 @@
   "bugs": {
     "url": "https://github.com/tegud/boomerang-catcher/issues"
   },
-  "homepage": "https://github.com/tegud/boomerang-catcher#readme"
+  "homepage": "https://github.com/tegud/boomerang-catcher#readme",
+  "devDependencies": {
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.16.0",
+    "jest": "^24.5.0",
+    "eslint": "^5.15.3"
+  },
+  "dependencies": {
+  }
 }

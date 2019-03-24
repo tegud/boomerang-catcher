@@ -1,4 +1,5 @@
 const querystring = require('querystring');
+const navigationTimingParser = require('./lib/parsers/navigation-timing');
 
 const getResponseHeaders = () => {
   if (!process.env.corsAllowOrigin) {
@@ -10,10 +11,12 @@ const getResponseHeaders = () => {
   };
 };
 
-const parseBodyParameters = body => body ? Object.entries(querystring.parse(body)) : [];
+const parseBodyParameters = body => (body ? Object.entries(querystring.parse(body)) : []);
 
 const buildParameters = ({ queryStringParameters, body }) => [
-  ...queryStringParameters && queryStringParameters.length ? Object.entries(queryStringParameters) : [],
+  ...queryStringParameters && queryStringParameters.length
+    ? Object.entries(queryStringParameters)
+    : [],
   ...parseBodyParameters(body),
 ].reduce((all, [key, value]) => {
   all[key] = value;
@@ -22,7 +25,9 @@ const buildParameters = ({ queryStringParameters, body }) => [
 }, {});
 
 module.exports.beacon = async (event) => {
-  console.log(buildParameters(event));
+  const parameters = buildParameters(event);
+  console.log(parameters);
+  console.log(navigationTimingParser.parse(parameters));
 
   return {
     statusCode: 204,
