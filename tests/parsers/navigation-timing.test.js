@@ -16,6 +16,30 @@ describe('navigation timing parsers', () => {
     });
   });
 
+  it('calculates redirect time', () => {
+    expect(parser.parse({
+      nt_red_st: '1553427959982',
+      nt_red_end: '1553427960022',
+    }).redirect).toEqual({
+      start: 1553427959982,
+      end: 1553427960022,
+      time: 40,
+    });
+  });
+
+  it('calculates redirect count if present', () => {
+    expect(parser.parse({
+      nt_red_st: '1553427959982',
+      nt_red_end: '1553427960022',
+      nt_red_cnt: 3,
+    }).redirect).toEqual({
+      start: 1553427959982,
+      end: 1553427960022,
+      time: 40,
+      count: 3,
+    });
+  });
+
   it('calculates dns time', () => {
     expect(parser.parse({
       nt_dns_st: '1553421507430',
@@ -91,5 +115,11 @@ describe('navigation timing parsers', () => {
       end: 1553421508601,
       time: 100,
     });
+  });
+
+  it('sets protocol', () => {
+    expect(parser.parse({
+      nt_protocol: 'h2',
+    }).protocol).toEqual('h2');
   });
 });
