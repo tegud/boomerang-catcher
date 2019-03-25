@@ -31,7 +31,7 @@ describe('round trip parsers', () => {
 
   it('sets start source', () => {
     expect(parser.parse({
-      t_start: 'navigation',
+      'rt.start': 'navigation',
     }).responseTimes.startSource).toEqual('navigation');
   });
 });
