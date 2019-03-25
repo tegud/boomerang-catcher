@@ -87,7 +87,7 @@ describe('navigation timing parsers', () => {
   it('calculates time to first byte', () => {
     expect(parser.parse({
       nt_nav_st: '1553421507429',
-      nt_res_end: '1553421507629',
+      nt_res_st: '1553421507629',
     }).timeToFirstByte).toEqual({
       start: 1553421507429,
       end: 1553421507629,
