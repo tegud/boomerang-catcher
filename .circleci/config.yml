@@ -10,5 +10,8 @@ jobs:
           name: install dependencies
           command: npm install
       - run:
+          name: test
+          command: npm test
+      - run:
           name: deploy
           command: serverless deploy

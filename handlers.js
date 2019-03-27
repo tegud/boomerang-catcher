@@ -1,6 +1,7 @@
 const querystring = require('querystring');
 const navigationTimingParser = require('./lib/parsers/navigation-timing');
 const roundTripParser = require('./lib/parsers/round-trip');
+const urlParser = require('./lib/pasers/url');
 
 const getResponseHeaders = () => {
   if (!process.env.corsAllowOrigin) {
@@ -28,8 +29,12 @@ const buildParameters = ({ queryStringParameters, body }) => [
 module.exports.beacon = async (event) => {
   const parameters = buildParameters(event);
   console.log(parameters);
-  console.log(navigationTimingParser.parse(parameters));
-  console.log(roundTripParser.parse(parameters));
+
+  console.log({
+    navigation: navigationTimingParser.parse(parameters),
+    url: urlParser.parse(parameters),
+    ...roundTripParser.parse(parameters),
+  });
 
   return {
     statusCode: 204,
