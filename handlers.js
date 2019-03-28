@@ -1,7 +1,7 @@
 const querystring = require('querystring');
 const navigationTimingParser = require('./lib/parsers/navigation-timing');
 const roundTripParser = require('./lib/parsers/round-trip');
-const urlParser = require('./lib/pasers/url');
+const urlParser = require('./lib/parsers/url');
 
 const getResponseHeaders = () => {
   if (!process.env.corsAllowOrigin) {
