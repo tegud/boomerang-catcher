@@ -36,6 +36,10 @@ module.exports.beacon = async (event) => {
     ...roundTripParser.parse(parameters),
   });
 
+  if (parameters.restiming) {
+    console.log(JSON.stringify(JSON.parse(parameters.restiming), null, 4));
+  }
+
   return {
     statusCode: 204,
     headers: getResponseHeaders(),
