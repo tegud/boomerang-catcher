@@ -3,6 +3,8 @@ const navigationTimingParser = require('./lib/parsers/navigation-timing');
 const roundTripParser = require('./lib/parsers/round-trip');
 const urlParser = require('./lib/parsers/url');
 
+const { trieToHash } = require('./lib/trie');
+
 const getResponseHeaders = () => {
   if (!process.env.corsAllowOrigin) {
     return {};
@@ -37,7 +39,7 @@ module.exports.beacon = async (event) => {
   });
 
   if (parameters.restiming) {
-    console.log(JSON.stringify(JSON.parse(parameters.restiming), null, 4));
+    console.log(JSON.stringify(trieToHash(JSON.parse(parameters.restiming)), null, 4));
   }
 
   return {
