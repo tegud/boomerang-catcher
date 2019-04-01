@@ -2,7 +2,6 @@ const querystring = require('querystring');
 const navigationTimingParser = require('./lib/parsers/navigation-timing');
 const roundTripParser = require('./lib/parsers/round-trip');
 const urlParser = require('./lib/parsers/url');
-
 const { trieToHash } = require('./lib/trie');
 
 const getResponseHeaders = () => {
