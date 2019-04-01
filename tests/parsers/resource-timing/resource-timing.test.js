@@ -1,4 +1,4 @@
-const parser = require('../../lib/parsers/resource-timing');
+const parser = require('../../../lib/parsers/resource-timing');
 
 describe('resource timing parser', () => {
   describe('type is set from initiator type enum', () => {
@@ -32,78 +32,6 @@ describe('resource timing parser', () => {
       'https://example.com/resource': '0',
     }),
   }).resources[0].resourceUrl).toBe('https://example.com/resource'));
-
-  it('sets startTime', () => expect(parser.parse({
-    restiming: JSON.stringify({
-      'https://example.com/resource': '0c',
-    }),
-  }).resources[0].startTime).toBe(12));
-
-  it('sets endTime', () => expect(parser.parse({
-    restiming: JSON.stringify({
-      'https://example.com/resource': '0c,3',
-    }),
-  }).resources[0].endTime).toBe(15));
-
-  it('sets duration', () => expect(parser.parse({
-    restiming: JSON.stringify({
-      'https://example.com/resource': '0c,3',
-    }),
-  }).resources[0].duration).toBe(3));
-
-  it('sets response', () => expect(parser.parse({
-    restiming: JSON.stringify({
-      'https://example.com/resource': '0c,3,2',
-    }),
-  }).resources[0].response).toEqual({ start: 2, end: 3, duration: 1 }));
-
-  it('sets request', () => expect(parser.parse({
-    restiming: JSON.stringify({
-      'https://example.com/resource': '0c,3,9,2',
-    }),
-  }).resources[0].request).toEqual({ start: 2, end: 9, duration: 7 }));
-
-  it('sets connect', () => expect(parser.parse({
-    restiming: JSON.stringify({
-      'https://example.com/resource': '0c,1,1,1,7,5,2',
-    }),
-  }).resources[0].connect).toEqual({ start: 2, end: 7, duration: 5 }));
-
-  it('sets dns', () => expect(parser.parse({
-    restiming: JSON.stringify({
-      'https://example.com/resource': '0c,1,1,1,1,1,1,c,2',
-    }),
-  }).resources[0].dns).toEqual({ start: 2, end: 12, duration: 10 }));
-
-  it('sets redirect', () => expect(parser.parse({
-    restiming: JSON.stringify({
-      'https://example.com/resource': '0c,1,1,1,1,1,1,1,1,b,3',
-    }),
-  }).resources[0].redirect).toEqual({ start: 3, end: 11, duration: 8 }));
-
-  it('sets size', () => expect(parser.parse({
-    restiming: JSON.stringify({
-      'https://example.com/resource': '0c,1,1*1c',
-    }),
-  }).resources[0].size).toEqual(12));
-
-  it('sets scriptAsync', () => expect(parser.parse({
-    restiming: JSON.stringify({
-      'https://example.com/resource': '0c,1,1*21',
-    }),
-  }).resources[0].scriptAsync).toEqual(true));
-
-  it('sets scriptDefer', () => expect(parser.parse({
-    restiming: JSON.stringify({
-      'https://example.com/resource': '0c,1,1*23',
-    }),
-  }).resources[0].scriptDefer).toEqual(true));
-
-  it('sets scriptBody', () => expect(parser.parse({
-    restiming: JSON.stringify({
-      'https://example.com/resource': '0c,1,1*24',
-    }),
-  }).resources[0].scriptBody).toEqual(true));
 
   it.skip('handles nested trie structures', () => expect(parser.parse({
     restiming: `{
