@@ -29,17 +29,20 @@ const buildParameters = ({ queryStringParameters, body }) => [
 
 module.exports.beacon = async (event) => {
   const parameters = buildParameters(event);
+  const userAgent = event.headers['User-Agent'];
   console.log(parameters);
 
   console.log({
+    type: process.env.BOOMRANGCATCHER_EVENT_TYPE || 'boomerang',
+    userAgent,
     navigation: navigationTimingParser.parse(parameters),
     url: urlParser.parse(parameters),
     ...roundTripParser.parse(parameters),
   });
 
-  if (parameters.restiming) {
-    console.log(JSON.stringify(trieToHash(JSON.parse(parameters.restiming)), null, 4));
-  }
+  // if (parameters.restiming) {
+  //   console.log(JSON.stringify(trieToHash(JSON.parse(parameters.restiming)), null, 4));
+  // }
 
   return {
     statusCode: 204,
