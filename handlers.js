@@ -36,7 +36,7 @@ module.exports.beacon = async (event) => {
     type: process.env.BOOMERANGCATCHER_EVENT_TYPE || 'boomerang',
     userAgent,
     navigation: navigationTimingParser.parse(parameters),
-    url: urlParser.parse(parameters),
+    ...urlParser.parse(parameters),
     ...roundTripParser.parse(parameters),
   };
 
