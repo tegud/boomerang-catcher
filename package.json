@@ -26,6 +26,7 @@
     "eslint": "^5.15.3"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "is-url": "^1.2.4",
     "resourcetiming-compression": "^1.2.1"
   }

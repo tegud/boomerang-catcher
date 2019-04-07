@@ -6,6 +6,8 @@ provider:
 functions:
   beacon:
     handler: handlers.beacon
+    environment:
+      webhook: ${env:BOOMERANGCATCHER_WEBHOOK_URL}
     events:
       - http:
           method: get
