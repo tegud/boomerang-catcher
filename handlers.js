@@ -2,7 +2,7 @@ const querystring = require('querystring');
 const navigationTimingParser = require('./lib/parsers/navigation-timing');
 const roundTripParser = require('./lib/parsers/round-trip');
 const urlParser = require('./lib/parsers/url');
-const { sendToWebhook } = require('./lib/webhook')
+const { sendToWebhook } = require('./lib/webhook');
 
 const getResponseHeaders = () => {
   if (!process.env.corsAllowOrigin) {
@@ -32,7 +32,7 @@ module.exports.beacon = async (event) => {
   const userAgent = event.headers['User-Agent'];
   console.log(parameters);
 
-  const event = {
+  const boomerangEvent = {
     type: process.env.BOOMERANGCATCHER_EVENT_TYPE || 'boomerang',
     userAgent,
     navigation: navigationTimingParser.parse(parameters),
@@ -40,8 +40,8 @@ module.exports.beacon = async (event) => {
     ...roundTripParser.parse(parameters),
   };
 
-  console.log(event);
-  await sendToWebhook([event]);
+  console.log(boomerangEvent);
+  await sendToWebhook([boomerangEvent]);
 
   // if (parameters.restiming) {
   //   console.log(JSON.stringify(trieToHash(JSON.parse(parameters.restiming)), null, 4));
