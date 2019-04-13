@@ -34,4 +34,10 @@ describe('round trip parsers', () => {
       'rt.start': 'navigation',
     }).responseTimes.startSource).toEqual('navigation');
   });
+
+  it('sets nextUrl to be nu value', () => {
+    expect(parser.parse({
+      'nu': 'https://example.com',
+    }).responseTimes.nextUrl).toEqual('https://example.com');
+  });
 });
